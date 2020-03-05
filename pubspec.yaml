@@ -16,7 +16,7 @@ dependencies:
   pointycastle: ^1.0.0-rc4
   asn1lib: ^0.5.3
   rsa_pkcs:
-    git: git://github.com/amaurel/rsa_pkcs.git
+    git: https://github.com/amaurel/rsa_pkcs.git
   async: ^2.2.0
 
 dev_dependencies:
