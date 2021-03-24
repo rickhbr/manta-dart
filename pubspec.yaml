@@ -13,7 +13,7 @@ dependencies:
   uuid: ^1.0.0
   json_annotation: '>=2.0.0'
   logging: ^1.0.0
-  pointycastle: ^1.0.0-rc4
+  pointycastle: ^3.0.1
   rsa_pkcs:
     git: https://github.com/amaurel/rsa_pkcs.git
   async: ^2.2.0
