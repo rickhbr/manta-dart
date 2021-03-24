@@ -6,6 +6,7 @@ import 'package:async/async.dart' show StreamQueue;
 import 'package:logging/logging.dart' show Logger;
 import 'package:meta/meta.dart' show required;
 import 'package:mqtt_client/mqtt_client.dart' as mqtt;
+import 'package:mqtt_client/mqtt_server_client.dart' as mqtt;
 import 'package:pointycastle/export.dart' show RSAPublicKey;
 import 'package:uuid/uuid.dart' show Uuid;
 
@@ -29,7 +30,7 @@ class MantaWallet {
   String host;
   int port;
   Map<String, String> topics;
-  mqtt.MqttClient client;
+  mqtt.MqttServerClient client;
   Completer<RSAPublicKey> certificate;
   StreamQueue<RSAPublicKey> certificates;
   StreamQueue<AckMessage> acks;
@@ -45,10 +46,10 @@ class MantaWallet {
   }
 
   MantaWallet._internal({this.session_id, this.host = "localhost",
-      this.port = MQTT_DEFAULT_PORT, mqtt.MqttClient mqtt_client = null,
+      this.port = MQTT_DEFAULT_PORT, mqtt.MqttServerClient mqtt_client = null,
       this.useWebSocket = false, this.autoReconnect = false}) {
     client = (mqtt_client == null)
-      ? mqtt.MqttClient.withPort(host, generate_session_id(), port)
+      ? mqtt.MqttServerClient.withPort(host, generate_session_id(), port)
       : mqtt_client;
     //client.logging(true);
     client.keepAlivePeriod = 20;
@@ -63,7 +64,7 @@ class MantaWallet {
     };
   }
 
-  factory MantaWallet(String url, {mqtt.MqttClient mqtt_client = null,
+  factory MantaWallet(String url, {mqtt.MqttServerClient mqtt_client = null,
       useWebSocket = false, autoReconnect = false}) {
     final match = MantaWallet.parseUrl(url);
     if (match != null) {
