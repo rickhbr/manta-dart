@@ -92,10 +92,8 @@ class MantaConfiguration {
 
       configuration = decode_configuration(pt);
 
-      if (configuration_callback != null) {
-        configuration_callback(configuration);
-      }
-    });
+      configuration_callback(configuration);
+        });
   }
 
   void link(String link_code) async {

@@ -67,26 +67,24 @@ class MantaWallet {
   factory MantaWallet(String url, {mqtt.MqttServerClient mqtt_client = null,
       useWebSocket = false, autoReconnect = false}) {
     final match = MantaWallet.parseUrl(url);
-    if (match != null) {
-      int port;
-      String host = match.group(1);
-      if (useWebSocket) {
-        port = match.group(2) ?? 443;
-        host = "wss://$host/mqtt";
-      } else {
-        port = match.group(2) ?? MQTT_DEFAULT_PORT;
-      }
-      MantaWallet inst = MantaWallet._internal(
-        session_id: match.group(3),
-        host: host,
-        port: port,
-        mqtt_client: mqtt_client,
-        useWebSocket: useWebSocket,
-        autoReconnect: autoReconnect);
-      inst.client.useAlternateWebSocketImplementation = false;
-      return inst;
+    int port;
+    String host = match.group(1);
+    if (useWebSocket) {
+      port = match.group(2) ?? 443;
+      host = "wss://$host/mqtt";
+    } else {
+      port = match.group(2) ?? MQTT_DEFAULT_PORT;
     }
-    return null;
+    MantaWallet inst = MantaWallet._internal(
+      session_id: match.group(3),
+      host: host,
+      port: port,
+      mqtt_client: mqtt_client,
+      useWebSocket: useWebSocket,
+      autoReconnect: autoReconnect);
+    inst.client.useAlternateWebSocketImplementation = false;
+    return inst;
+      return null;
   }
 
   Stream<AckMessage> _ackStream(String topic) {

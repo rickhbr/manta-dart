@@ -88,13 +88,13 @@ PaymentRequestMessage _$PaymentRequestMessageFromJson(
           : str_to_decimal(json['amount'] as String),
       fiat_currency: json['fiat_currency'] as String,
       destinations: (json['destinations'] as List)
-          ?.map((e) => e == null
+          .map((e) => e == null
               ? null
               : Destination.fromJson(e as Map<String, dynamic>))
-          ?.toList(),
+          .toList(),
       supported_cryptos: (json['supported_cryptos'] as List)
-          ?.map((e) => e as String)
-          ?.toSet());
+          .map((e) => e as String)
+          .toSet());
 }
 
 Map<String, dynamic> _$PaymentRequestMessageToJson(
@@ -105,7 +105,7 @@ Map<String, dynamic> _$PaymentRequestMessageToJson(
           instance.amount == null ? null : decimal_to_str(instance.amount),
       'fiat_currency': instance.fiat_currency,
       'destinations': instance.destinations,
-      'supported_cryptos': instance.supported_cryptos?.toList()
+      'supported_cryptos': instance.supported_cryptos.toList()
     };
 
 PaymentRequestEnvelope _$PaymentRequestEnvelopeFromJson(
